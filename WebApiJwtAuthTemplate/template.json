@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "ChatGPT",
+  "classifications": [ "WebAPI", "JWT", "Auth" ],
+  "identity": "ChatGPT.WebApiJwtAuth",
+  "name": "ASP.NET Core Web API with JWT Auth",
+  "shortName": "webapi-jwt",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "WebApiJwtTemplate",
+  "preferNameDirectory": true,
+  "sources": [
+    {
+      "source": "./",
+      "target": "./"
+    }
+  ]
+}
