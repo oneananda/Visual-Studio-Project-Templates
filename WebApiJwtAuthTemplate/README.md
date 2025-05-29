@@ -72,3 +72,40 @@ Your API will launch on `https://localhost:5001` (or similar). Navigate to `/swa
 * Wires up JWT Bearer authentication using the above settings.
 
 ---
+
+## Extending & Customization
+
+* **Persisted Users**: Replace the in-memory `UserService` with EF Core, Dapper, or another store:
+
+  * Register your `DbContext` and swap `builder.Services.AddSingleton<IUserService, UserService>()` accordingly.
+
+* **Role-Based Authorization**: Add roles as JWT claims in `AuthController.Login`, then decorate controllers/actions with `[Authorize(Roles = "Admin")]`.
+
+* **Token Refresh**: Implement a refresh-token endpoint and store refresh tokens per user (e.g., in a database).
+
+* **Additional Template Symbols**: Extend `.template.config/template.json` with new `symbols` (e.g., `useSwagger`, `useEFCore`) to conditionally include/exclude features via `dotnet new` flags.
+
+---
+
+## Packaging & Distribution
+
+To publish your template as a NuGet package:
+
+```bash
+dotnet pack --configuration Release
+# then push to NuGet.org
+dotnet nuget push bin/Release/YourCompany.WebApiJwtAuth.*.nupkg -s https://api.nuget.org/v3/index.json
+```
+
+Users can then install directly by referencing the NuGet package:
+
+```bash
+dotnet new -i YourCompany.WebApiJwtAuth::1.0.0
+```
+
+---
+
+## License
+
+This template is provided under the MIT License. See `LICENSE` for details.
+
