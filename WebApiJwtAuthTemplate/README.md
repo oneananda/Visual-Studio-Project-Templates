@@ -20,4 +20,55 @@ This is a [`dotnet new`](https://docs.microsoft.com/dotnet/core/tools/dotnet-new
 * Visual Studio 2022 (or later) **or** VS Code with C# extension
 * (Optional) [Postman](https://www.postman.com/) or similar for API testing
 
+## Installation
 
+1. Clone or download this folder (containing `.template.config/template.json`).
+2. Open a terminal in the root folder:
+
+   ```bash
+   dotnet new -i .
+   ```
+
+   This installs the template into your local `dotnet new` catalog.
+
+## Usage
+
+Create a new project using the template:
+
+```bash
+# Replace MyApi with your desired project name (and namespace)
+dotnet new webapi-jwt -n MyApi --framework net7.0
+cd MyApi
+dotnet run
+```
+
+Your API will launch on `https://localhost:5001` (or similar). Navigate to `/swagger/index.html` to access Swagger UI.
+
+---
+
+## Configuration
+
+### appsettings.json
+
+```json
+{
+  "JwtSettings": {
+    "Key": "YourSuperSecretKey_123!",
+    "Issuer": "YourApp",
+    "Audience": "YourAppUsers",
+    "DurationInMinutes": 60
+  },
+  "AllowedHosts": "*"
+}
+```
+
+* **Key**: Symmetric key for signing tokens (use a strong, secret value in production).
+* **Issuer** / **Audience**: Token validation parameters.
+* **DurationInMinutes**: Token lifetime.
+
+### Program.cs
+
+* Configures dependency injection for `IUserService`.
+* Wires up JWT Bearer authentication using the above settings.
+
+---
